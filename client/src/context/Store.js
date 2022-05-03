@@ -5,6 +5,7 @@ import AppReducer from './AppReducer';
 const Store = {
   hikers: [],
   bridges: [],
+  isLoading: true,
 };
 
 // creates the context for use by all components through it's
@@ -49,6 +50,7 @@ export const StoreProvider = ({ children }) => {
       value={{
         hikers: state.hikers,
         bridges: state.bridges,
+        isLoading: state.isLoading,
         getHikingData,
         addHiker,
         addBridge,

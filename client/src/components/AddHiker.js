@@ -5,8 +5,8 @@ export const AddHiker = () => {
   const { addHiker } = useContext(StoreContext);
 
   // local state vars and methods
-  const [id, setId] = useState(0);
-  const [speed, setSpeed] = useState(0);
+  const [id, setId] = useState('');
+  const [speed, setSpeed] = useState('');
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -26,13 +26,13 @@ export const AddHiker = () => {
       <h4>Add New Hiker</h4>
       <form onSubmit={onSubmit}>
         <div className='form-control'>
-          <label htmlFor='text'>Hiker Id:</label>
+          <label htmlFor='text'>Hiker ID:</label>
           <br />
           <input
-            type='number'
+            type='text'
             value={id}
             onChange={(e) => setId(e.target.value)}
-            placeholder='Enter Id...'
+            placeholder='id'
           />
         </div>
         <div className='form-control'>
@@ -42,7 +42,7 @@ export const AddHiker = () => {
             type='number'
             value={speed}
             onChange={(e) => setSpeed(e.target.value)}
-            placeholder='Enter hiker speed...'
+            placeholder='speed'
           />{' '}
           ft./minute
         </div>

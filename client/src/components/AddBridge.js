@@ -5,8 +5,8 @@ export const AddBridge = () => {
   const { addBridge } = useContext(StoreContext);
 
   // local state vars and methods
-  const [length, setLength] = useState(0);
-  const [numHikers, setNumHikers] = useState(0);
+  const [length, setLength] = useState('');
+  const [numHikers, setNumHikers] = useState('');
 
   const generateId = () => {
     return Math.floor(Math.random() * 100000000);
@@ -37,7 +37,7 @@ export const AddBridge = () => {
             type='number'
             value={length}
             onChange={(e) => setLength(e.target.value)}
-            placeholder='Enter Id...'
+            placeholder='length'
           />{' '}
           ft.
         </div>
@@ -48,7 +48,7 @@ export const AddBridge = () => {
             type='number'
             value={numHikers}
             onChange={(e) => setNumHikers(e.target.value)}
-            placeholder='Enter number of hikers crossing...'
+            placeholder='hikers'
           />
         </div>
         <br />
