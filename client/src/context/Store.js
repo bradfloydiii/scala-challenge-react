@@ -1,0 +1,60 @@
+import React, { createContext, useReducer } from 'react';
+import axios from 'axios';
+import AppReducer from './AppReducer';
+
+const Store = {
+  hikers: [],
+  bridges: [],
+};
+
+// creates the context for use by all components through it's
+// provider (StoreProvider)
+export const StoreContext = createContext(Store);
+
+// creates the global state provider for our context (StoreContext)
+export const StoreProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(AppReducer, Store);
+
+  const getHikingData = async () => {
+    try {
+      const res = await axios.get('/hiking/data');
+      dispatch({
+        type: 'GET_INITIAL_STATE',
+        payload: res.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: 'TRANSACTION_ERROR',
+        payload: { message: 'ERROR GET_TRANSACTIONS' },
+      });
+    }
+  };
+  
+  const addHiker = async (hiker) => {
+    dispatch({
+      type: 'ADD_HIKER',
+      payload: hiker,
+    });
+  };
+  
+  const addBridge = async (bridge) => {
+    dispatch({
+      type: 'ADD_BRIDGE',
+      payload: bridge,
+    });
+  };
+
+  return (
+    <StoreContext.Provider
+      value={{
+        hikers: state.hikers,
+        bridges: state.bridges,
+        getHikingData,
+        addHiker,
+        addBridge,
+      }}
+    >
+      {children}
+    </StoreContext.Provider>
+  );
+};

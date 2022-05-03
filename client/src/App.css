@@ -1,0 +1,21 @@
+.container {
+  width: 700px;
+  margin: 0 auto;
+  font-size: 1rem;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  min-width: 675px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  min-width: 675px;
+}
+
+.status {
+  text-align: center;
+}
