@@ -22,9 +22,5 @@ input {
 .col {
   display: flex;
   flex-direction: column;
-  /* min-width: 675px; */
-}
-
-.status {
-  /* text-align: center; */
+  min-width: 460px;
 }

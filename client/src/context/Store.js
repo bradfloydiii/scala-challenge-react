@@ -6,6 +6,7 @@ const Store = {
   hikers: [],
   bridges: [],
   isLoading: true,
+  results: [],
 };
 
 // creates the context for use by all components through it's
@@ -44,6 +45,13 @@ export const StoreProvider = ({ children }) => {
       payload: bridge,
     });
   };
+  
+  const calculateResults = async () => {
+    dispatch({
+      type: 'CALCULATE_ALL_BRIDGE_DATA',
+      payload: '',
+    });
+  };
 
   return (
     <StoreContext.Provider
@@ -51,9 +59,11 @@ export const StoreProvider = ({ children }) => {
         hikers: state.hikers,
         bridges: state.bridges,
         isLoading: state.isLoading,
+        calculatedBridgeData: state.results,
         getHikingData,
         addHiker,
         addBridge,
+        calculateResults,
       }}
     >
       {children}
