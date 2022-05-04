@@ -19,17 +19,36 @@ export const Results = () => {
   const foo = (e) => {
     e.preventDefault();
     calculateResults();
-  }
+  };
 
   return (
     <div className='status'>
-      <div className='row'>{calculatedBridgeData}</div>
       <div className='row'>
         <div className='col'>
-          <button onClick={(e) => getInitialData(e)}>Get Initial Data</button>
+          {calculatedBridgeData.map((data) => (
+            <p key={data.id}>
+              <span>
+                <strong>Bridge {data.id}</strong>
+              </span>
+              <br />
+              <span>
+                bridge length: {data.bridgeLength} ft.,
+                <br />
+                number of hikers: {data.numHikers},<br />
+                hiker ids: {data.hikerIds},<br />
+                total time to cross bridge: {Math.abs(data.totalBridgeTime).toFixed(0)} minute(s).
+                <br />
+              </span>
+            </p>
+          ))}
+        </div>
+      </div>
+      <div className='row'>
+        <div className='col'>
+          <button className='btn' onClick={(e) => getInitialData(e)}>Get Initial JSON Data</button>
         </div>
         <div className='col'>
-          <button onClick={(e) => foo(e)}>Calculate Bridge Data</button>
+          <button className='btn' onClick={(e) => foo(e)}>Calculate Bridge Data</button>
         </div>
       </div>
       {!isLoading && (

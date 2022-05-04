@@ -19,9 +19,14 @@ export default (state, action) => {
       };
     case 'CALCULATE_ALL_BRIDGE_DATA':
       let results = calculateAllBridgeData(state);
+      let arr = [];
+      // returning an object instead of array. forgot why this happens
+      for(let x in results) {
+        arr.push(results[x]);
+      }
       return {
         ...state,
-        results,
+        calculatedBridgeData: [...arr],
       };
     case 'TRANSACTION_ERROR':
       alert(JSON.stringify(action.payload));
@@ -35,19 +40,21 @@ export default (state, action) => {
 };
 
 export const calculateAllBridgeData = (state) => {
-  let results = [];
-  state.bridges.map((bridge) => {
-    results.push(
-      JSON.stringify(
-        calculateBridgeData(state, bridge.numHikers, bridge.length)
+  let arr = [];
+  for (let x = 0; x < state.bridges.length; x++) {
+    arr.push(
+      calculateBridgeData(
+        state,
+        state.bridges[x]._id,
+        state.bridges[x].numHikers,
+        state.bridges[x].length
       )
     );
-  });
-  console.log(`RESULTS: ${results}`);
-  return results;
+  }
+  return arr;
 };
 
-const calculateBridgeData = (state, numHikers, bridgeLength) => {
+const calculateBridgeData = (state, id, numHikers, bridgeLength) => {
   let totalBridgeTime = 0;
 
   // grab the subset of hikers by numHikers
@@ -71,5 +78,12 @@ const calculateBridgeData = (state, numHikers, bridgeLength) => {
       (index === slowHikers.length - 1 ? 0 : bridgeLength / leadHiker.speed);
   });
 
-  return { bridgeLength, numHikers, hikerIds, totalBridgeTime };
+  let obj = {};
+  obj.id = id;
+  obj.bridgeLength = bridgeLength;
+  obj.numHikers = numHikers;
+  obj.hikerIds = hikerIds;
+  obj.totalBridgeTime = totalBridgeTime;
+
+  return obj;
 };

@@ -24,3 +24,7 @@ input {
   flex-direction: column;
   min-width: 460px;
 }
+
+.btn {
+  max-width: 200px;
+}
