@@ -7,6 +7,7 @@ const Store = {
   bridges: [],
   calculatedBridgeData: [],
   isLoading: true,
+  totalBridgeTime: 0,
 };
 
 // creates the context for use by all components through it's
@@ -60,6 +61,7 @@ export const StoreProvider = ({ children }) => {
         bridges: state.bridges,
         isLoading: state.isLoading,
         calculatedBridgeData: state.calculatedBridgeData,
+        totalBridgeTime: state.totalBridgeTime,
         getHikingData,
         addHiker,
         addBridge,

@@ -20,13 +20,18 @@ export default (state, action) => {
     case 'CALCULATE_ALL_BRIDGE_DATA':
       let results = calculateAllBridgeData(state);
       let arr = [];
-      // returning an object instead of array. forgot why this happens
-      for(let x in results) {
+      let total = 0;
+      // returning an object instead of array. forgot why this happens in js
+      // manually pushing an array
+      for (let x in results) {
+        total += results[x].totalBridgeTime;
         arr.push(results[x]);
       }
+      console.log('total bridge time: ', total);
       return {
         ...state,
         calculatedBridgeData: [...arr],
+        totalBridgeTime: total,
       };
     case 'TRANSACTION_ERROR':
       alert(JSON.stringify(action.payload));
@@ -39,7 +44,7 @@ export default (state, action) => {
   }
 };
 
-export const calculateAllBridgeData = (state) => {
+const calculateAllBridgeData = (state) => {
   let arr = [];
   for (let x = 0; x < state.bridges.length; x++) {
     arr.push(

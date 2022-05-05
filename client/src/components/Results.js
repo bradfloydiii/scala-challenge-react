@@ -9,6 +9,7 @@ export const Results = () => {
     getHikingData,
     hikers,
     isLoading,
+    totalBridgeTime,
   } = useContext(StoreContext);
 
   const getInitialData = (e) => {
@@ -16,7 +17,7 @@ export const Results = () => {
     getHikingData();
   };
 
-  const foo = (e) => {
+  const calculateBridgeData = (e) => {
     e.preventDefault();
     calculateResults();
   };
@@ -41,6 +42,7 @@ export const Results = () => {
               </span>
             </p>
           ))}
+        {totalBridgeTime > 0 && <p>Total Bridge Time: <strong>{totalBridgeTime} minute(s)</strong></p>}
         </div>
       </div>
       <div className='row'>
@@ -48,7 +50,7 @@ export const Results = () => {
           <button className='btn' onClick={(e) => getInitialData(e)}>Get Initial JSON Data</button>
         </div>
         <div className='col'>
-          <button className='btn' onClick={(e) => foo(e)}>Calculate Bridge Data</button>
+          <button className='btn' onClick={(e) => calculateBridgeData(e)}>Calculate Bridge Data</button>
         </div>
       </div>
       {!isLoading && (
