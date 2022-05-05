@@ -37,21 +37,32 @@ export const Results = () => {
                 <br />
                 number of hikers: {data.numHikers},<br />
                 hiker ids: {data.hikerIds},<br />
-                total time to cross bridge: {Math.abs(data.totalBridgeTime).toFixed(0)} minute(s).
+                total time to cross bridge:{' '}
+                {Math.abs(data.totalBridgeTime).toFixed(0)} minute(s).
                 <br />
               </span>
             </p>
           ))}
-        {totalBridgeTime > 0 && <p>Total Bridge Time: <strong>{totalBridgeTime} minute(s)</strong></p>}
+          {totalBridgeTime > 0 && (
+            <p>
+              Total Bridge Time: <strong>{totalBridgeTime} minute(s)</strong>
+            </p>
+          )}
         </div>
       </div>
       <div className='row'>
         <div className='col'>
-          <button className='btn' onClick={(e) => getInitialData(e)}>Get Initial JSON Data</button>
+          <button className='btn' onClick={(e) => getInitialData(e)}>
+            Get Initial JSON Data
+          </button>
         </div>
-        <div className='col'>
-          <button className='btn' onClick={(e) => calculateBridgeData(e)}>Calculate Bridge Data</button>
-        </div>
+        {!isLoading && (
+          <div className='col'>
+            <button className='btn' onClick={(e) => calculateBridgeData(e)}>
+              Calculate Bridge Data
+            </button>
+          </div>
+        )}
       </div>
       {!isLoading && (
         <div className='row'>
