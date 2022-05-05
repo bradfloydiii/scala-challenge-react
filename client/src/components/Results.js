@@ -45,7 +45,7 @@ export const Results = () => {
           ))}
           {totalBridgeTime > 0 && (
             <p>
-              Total Bridge Time: <strong>{totalBridgeTime} minute(s)</strong>
+              Total Bridge Time: <strong>{Math.abs(totalBridgeTime).toFixed(0)} minute(s)</strong>
             </p>
           )}
         </div>
